@@ -35,8 +35,42 @@ class OrderCreated extends HomePageState {
   OrderCreated(this.order);
 }
 
+class DownPaymentSubmitted extends HomePageState {
+  final Order order;
+
+  DownPaymentSubmitted(this.order);
+}
+
 class SliderLoaded extends HomePageState {
   final List<Slider> sliders;
 
   SliderLoaded(this.sliders);
+}
+
+class FormAnswerSubmitted extends HomePageState {}
+
+class FormAnswerIssue extends HomePageState {}
+
+class OrdersLoaded extends HomePageState {
+  final List<Order> orders;
+
+  OrdersLoaded(this.orders);
+}
+
+class RateSubmitted extends HomePageState {
+  final Order order;
+
+  RateSubmitted(this.order);
+}
+
+class PrivacyLoaded extends HomePageState {
+  final Privacy privacy;
+
+  PrivacyLoaded(this.privacy);
+}
+
+class ImageUploaded extends HomePageState {
+  final String link;
+
+  ImageUploaded(this.link);
 }

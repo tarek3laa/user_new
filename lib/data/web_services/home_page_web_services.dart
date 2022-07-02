@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:dio/dio.dart';
 import 'package:user_new/data/models/location.dart';
 import 'package:user_new/data/models/order/answer.dart';
@@ -79,10 +77,10 @@ class HomePageWebServices {
   }
 
   Future<dynamic> downPayment(orderNumber, method) async {
-    var data = {"paymentMethod": "POCKET"};
-    var response = await dio.post(
-        baseUrl + 'order/$orderNumber/down-payment', data = data);
-    return response.data;
+    var data = {"paymentMethod": method};
+    var response =
+        await dio.put(baseUrl + 'order/$orderNumber/down-payment', data = data);
+    return response.data['order'];
   }
 
   Future<dynamic> retry(orderNumber, date) async {
@@ -101,12 +99,12 @@ class HomePageWebServices {
     var data = {'rate': rate, 'comment': comment};
     var response =
         await dio.post(baseUrl + 'order/$orderNumber/rate', data = data);
-    return response.data;
+    return response;
   }
 
   //TODO(6)get technical rate
 
-  Future<dynamic> getAllOrder({kwargs}) async {
+  Future<List<dynamic>> getAllOrder({kwargs}) async {
     var response = await dio.get(baseUrl + 'order', queryParameters: kwargs);
     return response.data['data'];
   }
@@ -130,7 +128,21 @@ class HomePageWebServices {
       'title': title,
       'text': text
     };
-    var response = await dio.post(baseUrl + 'forms-answer', data = data);
+    Response response = await dio.post(baseUrl + 'forms-answer', data = data);
+    return response;
+  }
+
+  Future<dynamic> getPrivacy({kwargs}) async {
+    Response response =
+        await dio.get(baseUrl + 'privacy', queryParameters: kwargs);
+    return response.data['data'];
+  }
+
+  Future<dynamic> uploadImage(path) async {
+    var formData =
+        FormData.fromMap({'image': await MultipartFile.fromFile(path)});
+    Response response =
+        await dio.post(baseUrl + 'admin/uploadImage', data: formData);
     return response.data;
   }
 }

@@ -1,43 +1,32 @@
 class Country {
-  Country({
-    this.deleted,
-    required this.countryCode,
-    required this.countryKey,
-    required this.name,
-    this.currency,
-    this.createdAt,
-    this.updatedAt,
-    this.id,
-  });
+  Country(
+      {required this.countryCode,
+      required this.countryKey,
+      required this.name,
+      required this.currency,
+      required this.id,
+      required this.logo});
 
-  bool? deleted;
   String countryCode;
   String countryKey;
   Pair name;
-  Pair? currency;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  int? id;
+  Pair currency;
+  int id;
+  String logo;
 
   factory Country.fromJson(Map<String, dynamic> json) => Country(
-        deleted: json["deleted"],
-        countryCode: json["countryCode"],
-        countryKey: json["countryKey"],
-        name: Pair.fromJson(json["name"]),
-        currency: Pair.fromJson(json["currency"]),
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        id: json["id"],
-      );
+      countryCode: json["countryCode"],
+      countryKey: json["countryKey"],
+      name: Pair.fromJson(json["name"]),
+      currency: Pair.fromJson(json["currency"]),
+      id: json["id"],
+      logo: json['logo']);
 
   Map<String, dynamic> toJson() => {
-        "deleted": deleted,
         "countryCode": countryCode,
         "countryKey": countryKey,
         "name": name.toJson(),
-        "currency": currency!.toJson(),
-        "createdAt": createdAt!.toIso8601String(),
-        "updatedAt": updatedAt!.toIso8601String(),
+        "currency": currency.toJson(),
         "id": id,
       };
 }
